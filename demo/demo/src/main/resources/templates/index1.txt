@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integración de ChatGPT</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        input[type="text"], input[type="submit"] {
+            padding: 10px;
+            margin: 5px;
+            width: 300px;
+        }
+        #response {
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #fff;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Integración de ChatGPT</h1>
+    <form action="/ask" method="post">
+        <input type="text" id="userMessage" name="userInput" placeholder="Escribe tu mensaje..." required>
+        <input type="submit" value="Enviar">
+    </form>
+
+    <div id="response">
+        <!-- Muestra la respuesta del servidor aquí -->
+        <p th:text="${response}">Aquí aparecerá la respuesta.</p>
+    </div>
+</body>
+</html>

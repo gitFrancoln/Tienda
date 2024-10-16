@@ -1,0 +1,33 @@
+package com.example.demo.controller;
+
+import com.example.demo.service.ChatGPTService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller
+public class ChatController {
+    private final ChatGPTService chatGPTService;
+
+    public ChatController(ChatGPTService chatGPTService) {
+        this.chatGPTService = chatGPTService;
+    }
+
+    @GetMapping("/")
+    public String index() {
+        return "index"; // nombre del archivo HTML
+    }
+
+    @PostMapping("/ask")
+    public String ask(@RequestParam String userInput, Model model) {
+        try {
+            String response = chatGPTService.getResponse(userInput);
+            model.addAttribute("response", response);
+        } catch (Exception e) {
+            model.addAttribute("response", "Error: " + e.getMessage());
+        }
+        return "index"; // Regresa a la vista
+    }
+}

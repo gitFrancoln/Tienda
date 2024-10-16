@@ -1,0 +1,61 @@
+/*el * significa todo*/
+*{
+    box-sizing: border-box; /*asegura que el ancho y alto incluya el padding y el borde*/
+    margin: 0; /*Elimino margenes por defecto*/
+    padding: 0;/*elimino padding por defecto*/
+}
+
+body{
+    display: flex;/*convierte el body en un contenedor flez*/
+    justify-content: center; /*centra horizontalmente*/
+    align-items: center;/*centra verticalmente*/
+    height: 100vh;/*altura completa de la ventana*/
+    background-color: #f0f0f0;
+    font-family: sans-serif;
+    font-size: 14px;
+}
+.container{
+    background-color: rgba(255,255,255, 0.9);
+    padding: 20px; /*espacio interno de la caja de 20px*/
+    border-radius: 8px; /*para redonder 8px*/
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /*Sombra suave*/
+}
+.login-form{
+    display: flex;/*convierte el formulario en un contenedor flex (adaptable para cualquier pantalla, responsive)*/
+    flex-direction: column;/*Elementos en columna*/
+}
+h1{
+    padding: 30px;
+    color: rgb(0, 0, 0);
+    text-align: center;
+}
+label{
+    margin-bottom: 5px;/*espaciado entre etiqueta e input*/
+}
+
+input{
+    padding: 12px;/*Espaciado interno*/
+    border: 1px solid #ccc; /*Borde gris claro*/
+    border-radius: 4px; /*border redondeados*/
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+/*Estilos para el boton de envío*/
+button{
+    width: 100%;
+text-align: center;
+padding: 5px;
+background-color: #007bff;/*color azul del botón*/
+color: white;/*letras blancas*/
+border-radius: 4px; /*borde redondeado*/
+border:none; /*no hay borde*/
+cursor: pointer; /*cambia el cursor a la manito cuando estas arriba del boton*/
+}
+/*Estilos del boton cuando el usuario coloca el cursor sobre él*/
+button:hover{
+    background-color: #0056b3; /*azul mas oscuro*/
+}
+p{
+    margin-top: 10px;
+}
