@@ -1,56 +1,53 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1.0"
-		/>
-		<title>Pagina Producto</title>
-		<link rel="stylesheet" href="listar-productos.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Página Producto</title>
+		<!-- Enlace a Bootstrap -->
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+		>
 	</head>
 	<body>
-		<header>
-			<h1>Logo</h1>
+		<!-- Encabezado -->
+		<header class="bg-primary text-white text-center p-4">
+			<h1>Productos destacados</h1>
 		</header>
 
-		<div class="container-title">Zapatos</div>
-
-		<main>
-			<div class="container-img">
-				<img
-					src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80"
-					alt="imagen-producto"
-				/>
-			</div>
-			<div class="container-info-product">
-				<!-- Detalles del producto aquí -->
-				<!-- ... -->
-			</div>
-		</main>
-
-		<!-- Integración de Thymeleaf para la lista de productos relacionados -->
-		<section class="container-related-products">
-			<h2>Productos Relacionados</h2>
-			<div class="card-list-products">
-				<div class="card" th:each="producto : ${productos}">
-					<div class="card-img">
-						<img th:src="${producto.imagenUrl}" alt="producto-relacionado" />
-					</div>
-					<div class="info-card">
-						<div class="text-product">
-							<h3 th:text="${producto.nombre}">Nombre del producto</h3>
-							<p class="category">Footwear, Sneakers</p>
+		<!-- Productos (Thymeleaf) -->
+		<section class="container mt-5">
+			<h2 class="text-center">Productos</h2>
+			<div class="row">
+				<!-- Iterar sobre los productos relacionados -->
+				<div class="col-md-4" th:each="producto : ${productos}">
+					<div class="card mb-4">
+						<img
+							th:src="${producto.imagenUrl}"
+							class="card-img-top"
+							alt="producto-relacionado"
+						/>
+						<div class="card-body">
+							<h5 class="card-title" th:text="${producto.nombre}">Nombre del producto</h5>
+							<p class="card-text category" th:text="${producto.descripcion}">Descripción del producto</p>
+							<p class="price" th:text="${producto.precio}">$XX.XX</p>
+							<a href="#" class="btn btn-primary">Ver Producto</a>
 						</div>
-						<div class="price" th:text="${producto.precio}">$XX.XX</div>
 					</div>
 				</div>
 			</div>
 		</section>
 
-		<footer>
-			<p>Footer</p>
+		<!-- Pie de Página -->
+		<footer class="bg-light text-center text-lg-start mt-5 p-3">
+			<p>© 2024 Mi Tienda Online | Todos los derechos reservados</p>
 		</footer>
+
+		<!-- Scripts de Bootstrap -->
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	</body>
 </html>
