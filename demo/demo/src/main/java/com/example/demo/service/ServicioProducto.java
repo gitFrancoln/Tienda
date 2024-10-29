@@ -19,5 +19,15 @@ public class ServicioProducto {
     }
     public List<Producto> listarProductos() {
         return repositorioProducto.findAll();
+    }
+        public List<Producto> buscarProductos(String query) {
+            return repositorioProducto.findByNombreContaining(query);
 }
+public List<Producto> buscarPorCategoria(String categorias){
+    return repositorioProducto.findByCategorias(categorias); 
+}
+public Producto obtenerProductoPorId(Long id) {
+    return repositorioProducto.findById(id).orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+}
+
 }

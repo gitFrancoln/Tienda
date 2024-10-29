@@ -18,6 +18,7 @@ public class Producto {
     private double precio;
     private String talle;
     private String imagenUrl;
+    private String categorias; 
 
     public Producto() {}
 
@@ -45,6 +46,9 @@ public class Producto {
     public String getImagenUrl() {
         return imagenUrl;
     }
+    public String getCategorias(){
+        return categorias;
+    }
 
     // Setters
     public void setId(Long id){
@@ -68,5 +72,8 @@ public class Producto {
 
     public void setImagenUrl(String imagenUrl) {
         this.imagenUrl = imagenUrl;
+    }
+    public void setCategorias(String categorias){
+        this.categorias=categorias;
     }
 }

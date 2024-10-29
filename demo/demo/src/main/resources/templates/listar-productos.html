@@ -6,20 +6,54 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Página Producto</title>
 		<!-- Enlace a Bootstrap -->
-		<link
-			rel="stylesheet"
-			href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-		>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+			<!--conexión a css-->
+		<link rel="stylesheet" href="/styles/listar-productos.css">
+		<!--enlace a fontawesome-->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 	</head>
+
+
 	<body>
 		<!-- Encabezado -->
-		<header class="bg-primary text-white text-center p-4">
-			<h1>Productos destacados</h1>
+		<header>
+			<div class="logo">
+				<form action="/pr/listar-productos" method="get">
+					<input type="image" src="/styles/gorila.png" alt="Logo">
+				</form>
+			</div>
+
+		<div class="buscador">
+		<form action="/pr/buscar" method="get">
+			<input type="text" name=query placeholder="¿Qué estás buscando?" required>
+		<!--emoji de fontawesome, buscador-->
+			<button type="submit"></button>
+		</form>
+	</div>
+
+	<!--div para el menu-->
+	<div>
+		<nav class="menu">
+		   <ul>
+			   <li>
+				   <a th:href="@{/pr/categorias/Hombre}">Hombre</a>
+			   </li>
+			   <li>
+				   <a th:href="@{/pr/categorias/Mujer}">Mujer</a>
+			   </li>
+			   <li>
+				   <a th:href="@{/pr/categorias/Ofertas}">Ofertas</a>
+			   </li>
+			   <li>
+				   <a th:href="@{/pr/categorias/Marcas}">Marcas</a>
+			   </li>
+		   </ul>
+		</nav> 
+   </div>
 		</header>
 
 		<!-- Productos (Thymeleaf) -->
 		<section class="container mt-5">
-			<h2 class="text-center">Productos</h2>
 			<div class="row">
 				<!-- Iterar sobre los productos relacionados -->
 				<div class="col-md-4" th:each="producto : ${productos}">
@@ -33,7 +67,7 @@
 							<h5 class="card-title" th:text="${producto.nombre}">Nombre del producto</h5>
 							<p class="card-text category" th:text="${producto.descripcion}">Descripción del producto</p>
 							<p class="price" th:text="${producto.precio}">$XX.XX</p>
-							<a href="#" class="btn btn-primary">Ver Producto</a>
+							<a th:href="@{/pr/producto/{id}(id=${producto.id})}" class="btn btn-primary">Ver Producto</a>
 						</div>
 					</div>
 				</div>
@@ -48,6 +82,6 @@
 		<!-- Scripts de Bootstrap -->
 		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
 	</body>
 </html>

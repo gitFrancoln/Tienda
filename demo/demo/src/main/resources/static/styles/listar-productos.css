@@ -1,0 +1,75 @@
+
+.menu ul{
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu ul li{
+    margin: 0 10px;
+}
+
+.menu ul li a{
+    text-decoration: none;
+    color: #aaa;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+.menu ul li a:hover{
+    color: black;
+}
+.menu{
+    background-color: rgb(230, 230, 230) !important ;
+    padding: 16px;
+}
+.menu.hidden {
+    transform: translateY(-100%); /* Mueve el menú fuera de la pantalla */
+    transition: transform 0.3s ease; /* Suaviza la transición */
+}
+
+
+.buscador{
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    align-items: center;
+}
+
+.buscador input[type="text"]{
+    padding: 14px;
+    font-size: 16px;
+    border: 3px #000;
+    border-radius: 7px;
+    width: 300px;
+    outline: none;
+}
+.logo{
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    align-items: center;
+}
+
+/*.bg-light text-center text-lg-start mt-5 p-3{
+    display: grid;
+    min-height: 100px;
+    grid-template-rows:auto 1fr auto; 
+}*/
+/*
+.buscador button{
+    background-color: rgba(21, 110, 212, 0.986);
+    padding: 7px;
+    color: white;
+    border: 1px  rgba(21, 110, 212, 0.986);
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.buscador button:hover{
+    background-color: yellow;
+}*/
