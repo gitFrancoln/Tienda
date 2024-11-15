@@ -31,6 +31,13 @@
 		</form>
 	</div>
 
+	<!--carrito-->
+	<div>
+		<form th:action="@{/carrito/ver/{carritoId}(carritoId=${carritoId})}" method="get">
+			<input type="image" src="/styles/carrito.png" alt="Ver carrito">
+		</form>
+	</div>
+	
 	<!--div para el menu-->
 	<div>
 		<nav class="menu">

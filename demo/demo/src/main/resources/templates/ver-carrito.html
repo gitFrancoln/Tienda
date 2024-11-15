@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1>Carrito de Compras</h1>
+    
+    <!-- Tabla de productos en el carrito -->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio Unitario</th>
+                <th>Subtotal</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="cart-items">
+            <!-- Aquí se llenarán dinámicamente los productos en el carrito -->
+        </tbody>
+    </table>
+
+    <!-- Muestra el total del carrito -->
+    <h2>Total: <span id="total">0.00</span></h2>
+
+    <!-- Enlace para continuar comprando -->
+    <a href="/pr/listar-productos" class="btn btn-primary">Continuar Comprando</a>
+    <button onclick="checkout()" class="btn btn-success">Finalizar Compra</button>
+
+    <!-- Mensaje si el carrito está vacío -->
+    <div id="empty-cart-message" style="display: none;">
+        <p>Tu carrito está vacío.</p>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    function updateCartDisplay() {
+        const cartItemsContainer = document.getElementById("cart-items");
+        cartItemsContainer.innerHTML = ""; // Limpia el contenido previo
+        let total = 0;
+
+        if (cart.length === 0) {
+            document.getElementById("empty-cart-message").style.display = "block";
+            document.getElementById("total").textContent = "0.00";
+            return;
+        } else {
+            document.getElementById("empty-cart-message").style.display = "none";
+        }
+
+        cart.forEach((item, index) => {
+            const subtotal = item.precio * item.cantidad;
+            total += subtotal;
+
+            const row = `
+                <tr>
+                    <td>${item.nombre}</td>
+                    <td>${item.cantidad}</td>
+                    <td>${item.precio.toFixed(2)}</td>
+                    <td>${subtotal.toFixed(2)}</td>
+                    <td>
+                        <button onclick="removeFromCart(${index})" class="btn btn-danger">Eliminar</button>
+                    </td>
+                </tr>
+            `;
+            cartItemsContainer.insertAdjacentHTML("beforeend", row);
+        });
+
+        document.getElementById("total").textContent = total.toFixed(2);
+    }
+
+    function removeFromCart(index) {
+        cart.splice(index, 1);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartDisplay();
+    }
+
+    function checkout() {
+        fetch('/api/checkout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ productos: cart })  // Enviar el carrito como JSON
+        })
+        .then(response => response.ok ? response.json() : Promise.reject(response))
+        .then(data => {
+            alert("Compra realizada con éxito");
+            localStorage.removeItem("cart");
+            cart = [];
+            updateCartDisplay();
+        })
+        .catch(error => console.error("Error en el checkout:", error));
+    }
+
+    document.addEventListener("DOMContentLoaded", updateCartDisplay);
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,6 +1,8 @@
 package com.example.demo.modelo;
 
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -15,7 +17,8 @@ public class Producto {
 
     private String nombre;
     private String descripcion;
-    private double precio;
+    //BigDecimal me permite hacer calculos con mas precisión
+    private BigDecimal precio;
     private String talle;
     private String imagenUrl;
     private String categorias; 
@@ -35,7 +38,8 @@ public class Producto {
         return descripcion;
     }
 
-    public double getPrecio() {
+
+    public BigDecimal getPrecio() {
         return precio;
     }
 
@@ -62,7 +66,7 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
-    public void setPrecio(double precio) {
+    public void setPrecio(BigDecimal precio) {
         this.precio = precio;
     }
 
