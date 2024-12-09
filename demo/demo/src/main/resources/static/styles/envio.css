@@ -1,0 +1,168 @@
+/* Reseteo básico */
+* {
+  margin: 0; /*elimino el margen predeterminado*/
+  padding: 0; /*elimino el padding predeterminado*/
+  box-sizing: border-box; /*para que todo mida lo mismo*/
+  font-family: sans-serif; /*fuente sans*/
+}
+
+/* Contenedor del formulario */
+.formulario-envio {
+  max-width: 600px; /* Limita el ancho */
+  margin: 40px; /* Centra el formulario */
+  padding: 20px; 
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Títulos */
+h3 {
+  text-align: left;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #9999;
+  color: black;
+  font-weight: 300;
+  font-size: 25px;
+}
+
+/* Grupos de formulario */
+.formulario-grupo {
+  margin-bottom: 15px; /* Espacio entre grupos */
+}
+
+/* Etiquetas */
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Inputs y selects */
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+/* Estilos de focus */
+input:focus,
+select:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Botón */
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #333;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #333;
+}
+
+/* Estilo para colocar dos campos en la misma fila */
+.fila-doble {
+  display: flex;
+  gap: 20px; /* Espacio entre los dos campos */
+}
+
+.fila-doble .campo {
+  flex: 1; /* Hace que cada campo ocupe el mismo espacio */
+}
+
+.cuadro {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  width: 220px;
+  background-color: #ffffff; /* Fondo blanco para destacar */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  margin-top: 70px;
+  margin-right: 50px;
+  font-family: 'Arial', sans-serif;
+}
+
+.cuadro img {
+  width: 100%; /* Imagen ajustada al ancho del contenedor */
+  border-radius: 8px; /* Bordes redondeados para la imagen */
+  margin-bottom: 10px; /* Separación entre la imagen y el texto */
+}
+
+.cuadro p {
+  font-size: 14px;
+  margin: 5px 0; /* Separación entre párrafos */
+  color: #333; /* Color del texto */
+  font-weight: bold; /* Resalta los precios */
+}
+
+.cuadro .subtotal, .cuadro .total {
+  display: flex;
+  justify-content: space-between; /* Alinea el texto a los extremos */
+  margin: 10px 0; /* Separación vertical */
+}
+
+.cuadro .total {
+  font-size: 25px; /* Tamaño más grande para destacar */
+  color: black; /* Color rojo para resaltar */
+}
+
+/* Media Query para pantallas móviles (menores a 768px) */
+@media (max-width: 768px) {
+  /* Ajustar el contenedor del formulario */
+  .formulario-envio {
+    margin: 10px;
+    padding: 15px;
+    width: 100%;
+  }
+
+  /* Títulos más pequeños */
+  h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  /* Ajuste de los campos en fila */
+  .fila-doble {
+    flex-direction: column; /* Pone los campos en una columna */
+    gap: 10px;
+  }
+
+  /* Reducción del tamaño del botón */
+  button {
+    padding: 12px;
+    font-size: 14px;
+  }
+
+  /* Ajustar el cuadro de resumen */
+  .cuadro {
+    position: static;
+    margin-top: 20px;
+    margin-right: 0;
+    width: 100%;
+    box-shadow: none;
+  }
+
+  .cuadro p {
+    font-size: 12px;
+  }
+
+  .cuadro .total {
+    font-size: 18px;
+  }
+}

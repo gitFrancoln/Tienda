@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.service.ServicioProducto;
 import com.example.demo.modelo.Producto;
+import com.example.demo.service.ServicioProducto;
 import com.example.demo.service.ServicioCarrito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -26,8 +27,10 @@ public class ControllerP {
 
     @GetMapping("/productos") //formulario para agregar productos
     public String mostrarFormulario(Model model) {
-        model.addAttribute("producto", new Producto());
-        return "crear-producto"; 
+        Producto producto = new Producto();
+        producto.setTalles(new ArrayList<>()); // Inicializar la lista de talles
+        model.addAttribute("producto", producto);
+        return "crear-producto";
     }
 
     @PostMapping("/productos") // maneja el envío del formulario
@@ -67,8 +70,20 @@ public class ControllerP {
 
     @GetMapping("/producto/{id}")
     public String verProducto(@PathVariable("id") Long id, Model model) {
+        // Obtener el producto por ID
         Producto producto = servicioProducto.obtenerProductoPorId(id);
+        model.addAttribute("talles", producto.getTalles());
+        // Pasar el producto completo al modelo
         model.addAttribute("producto", producto);
-        return "detalle-producto"; // Nombre de la vista del producto individual
+    
+        return "detalle-producto"; // Nombre de la vista
     }
+    /* 
+    @PostMapping("/producto/{id}/comprar")
+public String comprarProducto(@PathVariable("id") Long id, Model model) {
+    Producto producto = servicioProducto.obtenerProductoPorId(id);
+    model.addAttribute("producto", producto); // Pasamos el producto a la vista de pago
+    return "index"; // Redirigimos a la página de pago
+}
+    */
 }

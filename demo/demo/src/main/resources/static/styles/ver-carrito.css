@@ -1,0 +1,125 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    margin-top: 30px;
+    padding: 0 15px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Estilo de la tabla */
+.table-responsive {
+    margin-bottom: 30px;
+}
+
+.table th, .table td {
+    text-align: center;
+    padding: 15px;
+}
+
+.table th {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Estilo para el total */
+h2 {
+    text-align: center;
+    font-size: 1.5em;
+    color: #333;
+}
+
+/* Botones */
+.btn {
+    font-size: 1em;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+/* Disposición de los botones */
+.d-flex {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+/* Estilo para los botones de acción (pequeños) */
+.btn-sm {
+    font-size: 0.9em;
+    padding: 5px 10px;
+}
+
+/* Estilo para el mensaje de carrito vacío */
+#empty-cart-message {
+    display: none;
+    text-align: center;
+    font-size: 1.2em;
+    color: red;
+}
+
+/* Media Query para pantallas pequeñas (móviles) */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.5em;
+    }
+
+    .table th, .table td {
+        font-size: 0.9em;
+        padding: 10px;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .d-flex {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    .btn-sm {
+        font-size: 0.8em;
+        padding: 8px 15px;
+    }
+
+    /* Ajuste para la tabla */
+    .table th, .table td {
+        display: block;
+        text-align: left;
+        padding: 10px 0;
+    }
+
+    /* Ocultar columnas en pantallas muy pequeñas */
+    .table th, .table td:nth-child(2), .table td:nth-child(3) {
+        display: none;
+    }
+
+    #empty-cart-message {
+        font-size: 1em;
+    }
+}
+
+/* Media Query para pantallas extra pequeñas (móviles muy pequeños) */
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.3em;
+    }
+
+    .btn-sm {
+        font-size: 0.7em;
+    }
+}

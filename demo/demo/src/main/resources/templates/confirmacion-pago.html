@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado del Pago</title>
+</head>
+<body>
+    <h2>Resultado del Pago</h2>
+    <p><strong>Estado:</strong> <span th:text="${pago.estado}">Estado del pago</span></p>
+    <p><strong>ID de Mercado Pago:</strong> <span th:text="${pago.mercadoPagoId}">ID del pago</span></p>
+    <p><strong>Email del Comprador:</strong> <span th:text="${pago.compradorEmail}">Email</span></p>
+    <p><strong>Monto Total:</strong> <span th:text="${pago.total}">Monto</span></p>
+    <p><strong>Fecha de Creación:</strong> <span th:text="${pago.fechaCreacion}">Fecha</span></p>
+    <p><strong>Última Actualización:</strong> <span th:text="${pago.fechaActualizacion}">Fecha de actualización</span></p>
+
+    <a href="/pago/formulario">Volver al formulario</a>
+</body>
+</html>
+

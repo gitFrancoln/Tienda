@@ -6,7 +6,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.3.4</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
     <groupId>com.example</groupId>
     <artifactId>demo</artifactId>
@@ -17,42 +17,76 @@
         <java.version>21</java.version>
     </properties>
     <dependencies>
+        <!-- Starter para JPA -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
+
+        <!-- Starter para Thymeleaf -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
+
+        <!-- Starter para Web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
+        <!-- Validaciones: Jakarta Validation y Hibernate Validator -->
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+        </dependency>
+
+        <!-- Starter para Logging -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-logging</artifactId>
         </dependency>
+
+        <!-- Lombok para reducir el boilerplate -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+
+        <!-- Starter para Testing -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!-- Conector de MySQL -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.33</version>
         </dependency>
+
+        <!--Mercado Pago SDK-->
+      <dependency>
+  <groupId>com.mercadopago</groupId>
+  <artifactId>sdk-java</artifactId>
+  <version>2.1.29</version>
+</dependency>
+        
+        <!-- Cliente HTTP -->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
             <version>4.5.13</version>
         </dependency>
+
+        <!-- Jackson para JSON -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
@@ -78,16 +112,18 @@
         </plugins>
     </build>
 
-    <profiles>
-        <profile>
-            <id>prod</id>
-            <dependencies>
-                <dependency>
-                    <groupId>mysql</groupId>
-                    <artifactId>mysql-connector-java</artifactId>
-                    <scope>runtime</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-    </profiles>
+   <profiles>
+    <profile>
+        <id>prod</id>
+        <dependencies>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>8.0.34</version> <!-- Versión actualizada -->
+                <scope>runtime</scope>
+            </dependency>
+        </dependencies>
+    </profile>
+</profiles>
+
 </project>

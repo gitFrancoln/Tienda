@@ -1,3 +1,4 @@
+
 // Inicializar el carrito en el navegador
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 

@@ -17,10 +17,13 @@ public class Model {
     @Column(nullable = false)  
     private String password;
 
+    private String role;
+
     public Model(){}
-    public Model(String user, String password){
+    public Model(String user, String password, String role){
        this.user=user;
        this.password=password;
+       this.role=role;
     }
     //setters y getters
     public Long getId(){
@@ -32,6 +35,9 @@ public class Model {
 public String getPassword(){
     return password;
 }
+public String getRole(){
+    return role;
+}
 
 public void setId(Long id){
     this.id=id;
@@ -41,6 +47,10 @@ public void setUser(String user){
 }
 public void setPassword(String password){
     this.password=password;
+}
+public void setRole(String role){
+    this.role=role;
+ 
 }
 @Override
 public String toString() {

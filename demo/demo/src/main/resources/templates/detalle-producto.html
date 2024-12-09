@@ -18,11 +18,29 @@
             <h2 th:text="${producto.nombre}">Nombre del producto</h2>
             <p th:text="${producto.descripcion}">Descripción del producto</p>
             <h4 th:text="${producto.precio}">$0.00</h4>
+           
+            <!-- Botones de selección de talle -->
+            <th:block th:each="talle, i : ${producto.talles}">
+                <button type="button" class="size-button btn btn-outline-secondary" 
+                        th:data-size="${talle.nombre}" 
+                        th:data-stock="${talle.stock}" 
+                        th:text="${talle.nombre + ' (' + talle.stock + ')'}"
+                        th:classappend="${talle.stock == 0} ? 'disabled'"
+                        th:disabled="${talle.stock == 0}" 
+                        th:id="'size-button-' + ${i}">
+                </button>
+            </th:block>
             
-            <!-- Formulario para agregar al carrito (se cambia a un botón que llama a JavaScript) -->
+
+            <!-- Formulario para agregar al carrito -->
             <input type="hidden" id="productoId" th:value="${producto.id}">
             <input type="hidden" id="nombreProducto" th:value="${producto.nombre}">
             <input type="hidden" id="precioProducto" th:value="${producto.precio}">
+            <input type="hidden" id="talleProducto" value="">
+
+            <!-- Input oculto para el stock del talle seleccionado -->
+            <input type="hidden" id="stock" value="">
+
             
             <!-- Selección de cantidad -->
             <div class="form-group">
@@ -45,48 +63,131 @@
 </section>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
 <script>
-    function addToCart() {
-        const productoId = document.getElementById("productoId").value;
-        const nombre = document.getElementById("nombreProducto").value;
-        const precio = parseFloat(document.getElementById("precioProducto").value);
-        const cantidad = parseInt(document.getElementById("cantidad").value);
+   // Función para cargar el carrito
+   function loadCart() {
+       const cart = JSON.parse(localStorage.getItem("cart")) || [];
+       const cartProductsList = document.getElementById("cart-products-list");
 
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+       cartProductsList.innerHTML = "";
 
-        // Verificar si el producto ya está en el carrito
-        const existingProductIndex = cart.findIndex(item => item.productoId === productoId);
-        if (existingProductIndex !== -1) {
-            // Si ya existe, actualizar la cantidad
-            cart[existingProductIndex].cantidad += cantidad;
-        } else {
-            // Si no existe, agregar el nuevo producto
-            cart.push({ productoId, nombre, precio, cantidad });
-        }
+       if (cart.length === 0) {
+           cartProductsList.innerHTML = "<li>Tu carrito está vacío</li>";
+           return;
+       }
 
-        localStorage.setItem("cart", JSON.stringify(cart));
-        alert("Producto agregado al carrito");
-        updateCartDisplay();
-    }
+       cart.forEach(item => {
+           const li = document.createElement("li");
+           li.textContent = `${item.nombre} - Talle: ${item.talle} - Cantidad: ${item.cantidad} - Precio Total: $${(item.precio * item.cantidad).toFixed(2)}`;
+           cartProductsList.appendChild(li);
+       });
+   }
 
-    function updateCartDisplay() {
-        const cart = JSON.parse(localStorage.getItem("cart")) || [];
-        const cartProductsList = document.getElementById("cart-products-list");
-        cartProductsList.innerHTML = "";
+   // Marcar el talle seleccionado y desmarcar los demás
+   const sizeButtons = document.querySelectorAll(".size-button");
+   sizeButtons.forEach(button => {
+       button.addEventListener("click", () => {
+           document.querySelectorAll(".size-button").forEach(btn => btn.classList.remove("active"));
+           button.classList.add("active");
 
-        cart.forEach(item => {
-            const productItem = document.createElement("li");
-            productItem.textContent = `${item.nombre} - ${item.cantidad} unidades - $${(item.precio * item.cantidad).toFixed(2)}`;
-            cartProductsList.appendChild(productItem);
-        });
-    }
+           // Establecer el talle seleccionado
+           const talle = button.getAttribute("data-size");
+           const stock = parseInt(button.getAttribute("data-stock"));
+           
+           // Actualizar el campo del talle seleccionado y el stock
+           document.getElementById("talleProducto").value = talle;
+           document.getElementById("stock").value = stock;
 
-    // Cargar la vista del carrito al iniciar la página
-    document.addEventListener("DOMContentLoaded", updateCartDisplay);
+           // Actualizar el valor máximo del campo cantidad según el stock
+           document.getElementById("cantidad").max = stock;
+
+           // Si la cantidad actual es mayor que el stock, restablecerla
+           const currentQuantity = parseInt(document.getElementById("cantidad").value);
+           if (currentQuantity > stock) {
+               document.getElementById("cantidad").value = stock;
+           }
+       });
+   });
+
+   // Función para agregar el producto al carrito
+   function addToCart() {
+       const productoId = document.getElementById("productoId").value;
+       const nombre = document.getElementById("nombreProducto").value;
+       const precio = parseFloat(document.getElementById("precioProducto").value);
+       const cantidad = parseInt(document.getElementById("cantidad").value);
+       const talle = document.getElementById("talleProducto").value;
+       const stock = parseInt(document.getElementById("stock").value);  // Obtener el stock del talle seleccionado
+
+       // Verificar si se seleccionó un talle
+       if (!talle || talle.trim() === "") {
+           Swal.fire({
+               title: 'Error!',
+               text: 'Debes seleccionar un talle para el producto.',
+               icon: 'error',
+               confirmButtonText: 'Aceptar'
+           });
+           return;
+       }
+
+       // Validar que la cantidad no supere el stock
+       if (cantidad > stock) {
+           Swal.fire({
+               title: 'Error!',
+               text: 'No hay stock suficiente para la cantidad seleccionada.',
+               icon: 'error',
+               confirmButtonText: 'Aceptar'
+           });
+           return;
+       }
+
+       let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+       // Verificar si el producto ya está en el carrito
+       const existingProductIndex = cart.findIndex(item => item.productoId === productoId && item.talle === talle);
+
+       if (existingProductIndex !== -1) {
+           const currentQuantity = cart[existingProductIndex].cantidad;
+           const newQuantity = currentQuantity + cantidad;
+           if (newQuantity > stock) {
+               Swal.fire({
+                   title: 'Error!',
+                   text: 'No hay stock suficiente para la cantidad seleccionada.',
+                   icon: 'error',
+                   confirmButtonText: 'Aceptar'
+               });
+               return;
+           }
+           cart[existingProductIndex].cantidad = newQuantity;
+       } else {
+           cart.push({ productoId, nombre, precio, cantidad, talle });
+       }
+
+       // Guardar el carrito actualizado
+       localStorage.setItem("cart", JSON.stringify(cart));
+
+       Swal.fire({
+           title: 'Producto agregado',
+           text: 'El producto ha sido agregado al carrito.',
+           icon: 'success',
+           confirmButtonText: 'Aceptar'
+       });
+
+       // Actualizar la vista del carrito
+       loadCart();
+   }
+
+   // Cargar carrito al iniciar la página
+   window.onload = function() {
+       loadCart();
+   };
 </script>
 
+<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 </html>

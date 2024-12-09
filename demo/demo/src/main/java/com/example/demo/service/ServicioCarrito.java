@@ -42,7 +42,7 @@ public class ServicioCarrito {
         return carritoRS.findById(id);
     }
     public Long obtenerOCrearCarritoId() {
-        // Aquí, ajusta el criterio de obtención del carrito; por ahora asumimos un único carrito.
+        // ajusta el criterio de obtención del carrito
         Optional<Carrito> carritoExistente = carritoRS.findTopByOrderByIdDesc();
         
         // Si hay un carrito existente, devolver su ID

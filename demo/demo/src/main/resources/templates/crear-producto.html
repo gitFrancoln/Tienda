@@ -16,14 +16,43 @@
         <label for="descripcion">Descripción:</label>
         <textarea id="descripcion" th:field="*{descripcion}" required></textarea><br>
 
-        <label for="Talle">Talle:</label>
-        <input type="text" id="talle" th:field="*{talle}"/><br>
+        <!--ACÁ ES PARA INGRESAR LOS TALLES Y EL STOCK DE CADA TALLE-->
+        <label for="talle1">Talle °1:</label>
+        <input type="text" id="talle1" th:field="*{talles[0].nombre}" /><br>
+
+        <label for="stock">Stock para 1°talle:</label>
+        <input type="text" id="stock1" th:field="*{talles[0].stock}" > <br>
+
+
+        <label for="talle2">Talle 2:</label>
+        <input type="text" id="talle2" th:field="*{talles[1].nombre}" /><br>
+        
+        <label for="stock">Stock para 2°talle:</label>
+        <input type="text" id="stock2" th:field="*{talles[1].stock}" > <br>
+
+        <label for="talle3">Talle 3:</label>
+        <input type="text" id="talle3" th:field="*{talles[2].nombre}" /><br>
+
+        <label for="stock">Stock para 3°talle:</label>
+        <input type="text" id="stock3" th:field="*{talles[2].stock}" > <br>
+
+        <label for="talle1">Talle 4:</label>
+        <input type="text" id="talle4" th:field="*{talles[3].nombre}" /><br>
+        
+        <label for="stock">Stock para 4°talle:</label>
+        <input type="text" id="stock4" th:field="*{talles[3].stock}" > <br>
+
+        <label for="talle2">Talle 5:</label>
+        <input type="text" id="talle5" th:field="*{talles[4].nombre}" /><br>
+        
+        <label for="stock">Stock para 5°talle:</label>
+        <input type="text" id="stock5" th:field="*{talles[4].stock}" > <br>
 
         <label for="imagenUrl">URL de Imagen:</label>
         <input type="text" id="imagenUrl" th:field="*{imagenUrl}"  /><br>
 
         <label for="categorias">Categorias:</label>
-        <input type="text" id="categorias" th:field="*{categorias}"requiered /><br>
+        <input type="text" id="categorias" th:field="*{categorias}"required /><br>
 
         <button type="submit">Agregar Producto</button>
     </form>
