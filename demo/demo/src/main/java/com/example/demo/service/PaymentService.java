@@ -18,7 +18,7 @@ import com.mercadopago.exceptions.MPApiException;
 public class PaymentService {
     public Payment processPayment(PaymentRequest request) throws MPException, MPApiException {
         // Configura tu token de acceso de Mercado Pago
-        MercadoPagoConfig.setAccessToken("TEST-129930572213678-111620-44ca9b62f9d307854aa5fef954d57885-1225229876");
+        MercadoPagoConfig.setAccessToken("");
 
     
     PaymentClient client = new PaymentClient();
