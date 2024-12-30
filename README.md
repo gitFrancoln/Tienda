@@ -83,7 +83,7 @@ La integración con **Mercado Pago Checkout Bricks** asegura un proceso de pago 
 '
 ---
    ### **Créditos:**
-  - Desarrollador: Franco Núñez.
+  - Desarrollador: Franco Nuñez.
   - API de pagos: Mercado Pago.
   - Plantillas HTML: Bootstrap.
    
