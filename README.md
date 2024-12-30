@@ -80,3 +80,10 @@ La integración con **Mercado Pago Checkout Bricks** asegura un proceso de pago 
 1. **Clonar el repositorio:**  
    ```bash
    git clone https://github.com/gitFrancoln/Tienda
+'
+   ---
+   ## **Créditos**
+  - Desarrollador: Franco Núñez.
+  - API de pagos: Mercado Pago.
+  - Plantillas HTML: Bootstrap.
+   
